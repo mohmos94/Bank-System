@@ -1,3 +1,5 @@
+package Interface;
+
 public interface IBank_Konto {
 
     void lage_Conto(String kontonavn, String konto_Nummer);

@@ -1,4 +1,4 @@
-import java.util.regex.Pattern;
+import Interface.Ikunde;
 
 /**
  * Kunde klassen representerer en kundeforhold i banksystemet. Man kan opprette så mange kunder man ønsker

@@ -1,3 +1,5 @@
+import Interface.IBank_Konto;
+
 public class Bank_Konto implements IBank_Konto {
     private String kontonavn;
     private String konto_Type;

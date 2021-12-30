@@ -1,6 +1,8 @@
+import Interface.IBank_System;
+
 import java.util.Scanner;
 
-public class Bank_System implements IBank_System{
+public class Bank_System implements IBank_System {
 
     private String brukernavn;
     private String passord;
