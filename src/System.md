@@ -2,7 +2,7 @@
 
 <br><h2 align ="center"> use case for the bank systemet</h2>
 
-<img width="33%" align="left" src="main/Images/use_case.png">
+<img width="33%" align="left" src="Images/use_case.png">
 Her har vi laget en use case som skal vise hvordan aktørene vil samhandle med systemet.
 Dette er et pekepinn på de viktigste handlingene som kunden ønsker
 Vi deler use case opp i
@@ -26,12 +26,12 @@ Primæraktører
 # Sekvensdiagram
 
 <p align="left" width="100%">
-<img width="50%" src="main/Images/sequence_punkt_one.png">
-<img width="50%" src="main/Images/sequence_punkt_two.png">
+<img width="50%" src="Images/sequence_punkt_one.png">
+<img width="50%" src="Images/sequence_punkt_two.png">
 </p>
 
 # Classdiagram
-<img width="50%" src="main/Images/class_diagram.png">
+<img width="50%" src="Images/class_diagram.png">
 
 
 
