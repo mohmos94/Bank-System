@@ -1,3 +1,5 @@
+package classes;
+
 import Interface.IBank_Konto;
 
 public class Bank_Konto implements IBank_Konto {
@@ -18,6 +20,11 @@ public class Bank_Konto implements IBank_Konto {
     public String getKontonavn() {
         return kontonavn;
     }
+
+    /**
+     * metode for å endre kontonavnet
+     * @param kontonavn tar et kontonavn som parameter
+     */
 
     public void setKontonavn(String kontonavn) {
         String drift = "driftskonto";

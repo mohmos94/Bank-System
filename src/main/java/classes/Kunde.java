@@ -1,7 +1,9 @@
+package classes;
+
 import Interface.Ikunde;
 
 /**
- * Kunde klassen representerer en kundeforhold i banksystemet. Man kan opprette så mange kunder man ønsker
+ * classes.Kunde klassen representerer en kundeforhold i banksystemet. Man kan opprette så mange kunder man ønsker
  * @author mosti
  */
 
