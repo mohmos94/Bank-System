@@ -15,8 +15,6 @@ public class Bank_Konto implements IBank_Konto {
     }
 
 
-
-
     public String getKontonavn() {
         return kontonavn;
     }
