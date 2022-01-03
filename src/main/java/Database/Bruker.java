@@ -15,7 +15,16 @@ public class Bruker extends DB implements IDB {
 
     @Override
     public void insert(int brukerID, String brukernavn, String passord, int personId ){
-        inserte(brukerID, brukernavn, passord, personId);
+        try{
+
+            Connection connection  = DriverManager.getConnection(Connection_String,user, password);
+            Statement statement = connection.createStatement();
+            statement.execute("insert into bruker (BrukerID, Brukernavn, Passord, PersonID)values(brukerId, brukernavn, passord,personId)");
+        }
+
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     private void inserte(int brukerID, String brukernavn, String passord, int personId){
@@ -24,7 +33,7 @@ public class Bruker extends DB implements IDB {
 
             Connection connection  = DriverManager.getConnection(Connection_String,user, password);
             Statement statement = connection.createStatement();
-            statement.execute("insert into bruker values(brukerId, brukernavn, passord,personId)");
+            statement.execute("insert into bruker (BrukerID, Brukernavn, Passord, PersonID)values(brukerId, brukernavn, passord,personId)");
         }
 
         catch (SQLException e){
