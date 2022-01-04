@@ -1,20 +1,20 @@
-package Database;
+package Database.Classes;
 
-import Interface.IDB;
+import Database.Interface.IBruker;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Bruker extends DB implements IDB {
+public class BrukerDB extends DB implements IBruker {
 
     /**
      * insert into database
      */
 
     @Override
-    public void insert(int brukerID, String brukernavn, String passord, int personId ){
+    public void insert(int brukerID, String brukernavn, String passord, int personId){
         try{
 
             Connection connection  = DriverManager.getConnection(Connection_String,user, password);
@@ -72,7 +72,7 @@ public class Bruker extends DB implements IDB {
 
             Connection connection  = DriverManager.getConnection(Connection_String,user, password);
             Statement statement = connection.createStatement();
-            statement.execute("Delete from  bruker where BrukerID = brukerId and Brukernavn = brukernavn and Passord = passord and Person = personId");
+            statement.execute("Delete from  bruker where BrukerID = brukerId and Brukernavn = brukernavn and Passord = passord and PersonID = personId");
         }
 
         catch (SQLException e){
