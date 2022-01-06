@@ -10,7 +10,7 @@ public class JDBC {
             Connection connection  = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank_system","root", "Nettavisen123+");
             Statement statement = connection.createStatement();
             statement.execute("CREATE TABLE if not exists PDF(FAKTURANUMMER int ,KJØPER varchar(150), KIDDNUMMER varchar(20), KONTONUMMER varchar(11) )");
-            statement.execute(" insert into PDF values (2,'mosti as', '1256445221', '1234687912' ) ");
+            statement.execute(" insert into PDF values (4,'mosti as', '1256445221', '1234687912' ) ");
             //statement.execute(" insert into PDF values (3,'Arany as', '1256445221', '1234687912' ) ");
             //statement.execute("update PDF set kjøper ='asie as'  where kjøper like '%most%' ");
             statement.execute("select * from PDF");

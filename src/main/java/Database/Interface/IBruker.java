@@ -1,13 +1,15 @@
 package Database.Interface;
 
+import java.sql.SQLException;
+
 public interface IBruker {
+    public void createConnection() throws SQLException;
 
+    void insert(String brukernavn, String passord, int PersonID);
 
-    void insert(int brukerID, String brukernavn, String passord, int personId);
+    void update(String brukernavn, String passord, int PersonID) throws SQLException;
 
-    void update(int brukerID, String brukernavn, String passord, int personId);
+    void delete(String brukernavn, String passord, int PersonID);
 
-    void delete(int brukerID, String brukernavn, String passord, int personId);
-
-    void read(int brukerID, String brukernavn, String passord, int personId);
+    void read(int brukerID);
 }

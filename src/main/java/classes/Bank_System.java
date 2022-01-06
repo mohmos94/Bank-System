@@ -53,9 +53,9 @@ public class Bank_System implements IBank_System {
 
     @Override
     public String verifisert_Bruker(int value) {
-        String godkjent = "Bruker er godkjent";
-        String feil = "passordet eller brukernavnet er feil";
-        String bruker_Finnes_Ikke= "Denne brukeren er ikke registrert";
+        final String godkjent = "Bruker er godkjent";
+        final String feil = "passordet eller brukernavnet er feil";
+        final String bruker_Finnes_Ikke= "Denne brukeren er ikke registrert";
         if (value == 1){
             return godkjent;
         }
