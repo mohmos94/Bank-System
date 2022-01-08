@@ -1,9 +1,12 @@
-package classes;
+package controller.classes;
 
-import Interface.Ikunde;
+import Database.Classes.DbKunde;
+import controller.Interface.Ikunde;
+
+import java.sql.SQLException;
 
 /**
- * classes.Kunde klassen representerer en kundeforhold i banksystemet. Man kan opprette så mange kunder man ønsker
+ * controller.Interface.classes.Kunde klassen representerer en kundeforhold i banksystemet. Man kan opprette så mange kunder man ønsker
  * @author mosti
  */
 
@@ -14,6 +17,11 @@ public class Kunde implements Ikunde {
     private String telefon;
     private String mail;
 
+    private DbKunde kunde  =new DbKunde();
+
+
+    public Kunde() {
+    }
 
     /**
      * konstruktor for å initialisere en kunde objekt
@@ -23,12 +31,20 @@ public class Kunde implements Ikunde {
      * @param mail tekst verdi for e-posten til kunden
      */
 
-    public Kunde(String for_Navn, String etter_Navn, String telefon, String mail) {
+    public Kunde(String for_Navn, String etter_Navn, String telefon, String mail) throws SQLException {
         this.for_Navn = for_Navn;
         this.etter_Navn = etter_Navn;
         this.telefon = telefon;
         this.mail = mail;
         this.fullname = for_Navn + etter_Navn;
+        createCustomer();
+    }
+
+
+    public void createCustomer () throws SQLException {
+
+
+        kunde.insert(1, this.etter_Navn, this.for_Navn, this.telefon,this.mail);
     }
 
 
@@ -60,7 +76,6 @@ public class Kunde implements Ikunde {
                 break;
         }
     }
-
 
     /**
      * @param tilbakeMelding en tekstlig tilbakemelding som kunden får ifra handlingen han ønsker å utføre i klassen
@@ -97,7 +112,6 @@ public class Kunde implements Ikunde {
                 System.out.println("kan ikke overføre mellom kontoene");
         }
     }
-
 
 
     public String getTelefon() {

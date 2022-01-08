@@ -1,6 +1,4 @@
-package Interface;
-
-import java.util.ArrayList;
+package controller.Interface;
 
 public interface IBank_System{
     public int loggin(String brukernavn, String passord);

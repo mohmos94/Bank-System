@@ -1,6 +1,6 @@
-package classes;
+package controller.classes;
 
-import Interface.IBank_System;
+import controller.Interface.IBank_System;
 
 import java.util.Scanner;
 

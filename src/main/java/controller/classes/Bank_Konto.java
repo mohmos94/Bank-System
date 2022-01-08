@@ -1,8 +1,7 @@
-package classes;
+package controller.classes;
 
-import Interface.IBank_Konto;
 
-public class Bank_Konto implements IBank_Konto {
+public class Bank_Konto   {
     private String kontonavn;
     private String konto_Type;
     private String konto_Nummer;
@@ -97,7 +96,6 @@ public class Bank_Konto implements IBank_Konto {
      */
 
 
-    @Override
     public void lage_Conto(String kontonavn, String konto_Nummer) {
         lage_Konto(kontonavn, konto_Nummer);
     }
@@ -110,6 +108,7 @@ public class Bank_Konto implements IBank_Konto {
 
         if (kontonavn.equals(drift) || kontonavn.equals(bruks) || kontonavn.equals(spare) || kontonavn.equals(pensjon)) {
             if(konto_Nummer.length() == 11 && konto_Nummer.matches("[0-9]*")){
+
                 return konto_Nummer;
             }
         }
@@ -118,7 +117,6 @@ public class Bank_Konto implements IBank_Konto {
     }
 
 
-    @Override
     public void slette_konto(String kontonavn, String konto_Nummer) {
 
         System.out.println(kontonavn + " med kontonummer" + konto_Nummer + " har blitt slettet");
