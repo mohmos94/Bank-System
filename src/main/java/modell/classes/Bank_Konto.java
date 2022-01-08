@@ -1,4 +1,4 @@
-package controller.classes;
+package modell.classes;
 
 
 public class Bank_Konto   {

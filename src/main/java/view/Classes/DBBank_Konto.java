@@ -1,6 +1,6 @@
-package Database.Classes;
+package view.Classes;
 
-import Database.Interface.IBank_Konto;
+import view.Interface.IBank_Konto;
 
 import java.sql.*;
 

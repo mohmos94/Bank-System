@@ -1,4 +1,4 @@
-package controller.Interface;
+package modell.Interface;
 
 public interface IBank_System{
     public int loggin(String brukernavn, String passord);

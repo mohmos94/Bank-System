@@ -1,6 +1,6 @@
-package controller.classes;
+package modell.classes;
 
-import controller.Interface.IBank_System;
+import modell.Interface.IBank_System;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package Database.Classes;
+package view.Classes;
 
 public class DB {
     public static final String Connection_String ="jdbc:mysql://localhost:3306/bank_system";

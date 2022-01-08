@@ -1,7 +1,7 @@
-package controller.classes;
+package modell.classes;
 
-import Database.Classes.DbKunde;
-import controller.Interface.Ikunde;
+import view.Classes.DbKunde;
+import modell.Interface.Ikunde;
 
 import java.sql.SQLException;
 

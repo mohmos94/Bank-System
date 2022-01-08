@@ -1,44 +1,43 @@
-package Database.Classes;
+package view.Classes;
 
-import Database.Interface.Ikunde;
+import view.Interface.IBruker;
 
 import java.sql.*;
 
-public class DbKunde extends DB implements Ikunde{
+
+public class DbBruker extends DB implements IBruker {
+
 
     @Override
-    public void insert(int id, String etternavnet, String fornavn, String telefon, String mail) throws SQLException {
+    public void insert(int id, String brukernavn, String passord, int personligID) throws SQLException {
         System.out.println("running SQL code...");
-        String insert = "insert into kunde values(?,?, ?,?,?);";
+        String insert = "insert into bruker values(?, ?, ?,?);";
         Connection connection = DriverManager.getConnection(Connection_String, user, password);
         try (PreparedStatement pre = connection.prepareStatement(insert)) {
             pre.setInt(1, id);
-            pre.setString(2, etternavnet);
-            pre.setString(3, fornavn);
-            pre.setString(4, telefon);
-            pre.setString(5, mail);
+            pre.setString(2, brukernavn);
+            pre.setString(3, passord);
+            pre.setLong(4, personligID);
             pre.executeUpdate();
             System.out.println("SQL code is finished successfully");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
-    public void update(int id, String etternavnet, String fornavn, String telefon, String mail) throws SQLException {
+    public void update(int id, String brukernavn, String passord, int personId) throws SQLException {
         System.out.println("running SQL code...");
-        String update = "update kunde set lastName = ?, FirstName = ?, Telefon = ?, Email = ? where PersonID = ?";
+        String update = "update bruker set Brukernavn = ?, Passord = ? where BrukerID = ?";
         Connection connection = DriverManager.getConnection(Connection_String, user, password);
         try (PreparedStatement pre = connection.prepareStatement(update)) {
-            pre.setInt(5, id);
-            pre.setString(1, etternavnet);
-            pre.setString(2, fornavn);
-            pre.setString(3, telefon);
-            pre.setString(4, mail);
+            pre.setInt(3, id);
+            pre.setString(1, brukernavn);
+            pre.setString(2, passord);
             pre.executeUpdate();
             System.out.println("SQL code is finished successfully");
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,8 +47,7 @@ public class DbKunde extends DB implements Ikunde{
     @Override
     public void delete(int id) throws SQLException {
         System.out.println("running SQL code...");
-
-        String delete = "delete from kunde where PersonID = ?";
+        String delete = "delete from bruker where BrukerID = ?";
         Connection connection = DriverManager.getConnection(Connection_String, user, password);
         try (PreparedStatement pre = connection.prepareStatement(delete)) {
             pre.setInt(1, id);
@@ -59,24 +57,25 @@ public class DbKunde extends DB implements Ikunde{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
     public void read(int id) throws SQLException {
-        String read = "select * from kunde where PersonID = ?";
+        System.out.println("running SQL code...");
+
+        String read = "select * from bruker where BrukerID = ?";
         Connection connection = DriverManager.getConnection(Connection_String, user, password);
         try (PreparedStatement pre = connection.prepareStatement(read)) {
             pre.setInt(1, id);
 
             ResultSet rs = pre.executeQuery();
             while(rs.next()){
-                System.out.println("Reading from table kunde index: "+  rs.getInt( 1) + " ");
-                System.out.print(rs.getString(2) + " ");
-                System.out.print(rs.getString(3) + " ");
-                System.out.print(rs.getString(4) + " ");
-                System.out.println(rs.getString(5) + " ");
-                System.out.println("database reading ended");
-
+                System.out.println("Reading from table bruker index: "+  rs.getInt( 1) + " ");
+                System.out.println("Brukernavnet: " + rs.getString( 2) + " ");
+                System.out.println("passord: " + rs.getString(3) + " ");
+                System.out.println();
+                System.out.println("SQL code is finished successfully");
             }
 
         } catch (SQLException e) {

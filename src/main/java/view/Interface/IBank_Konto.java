@@ -1,4 +1,4 @@
-package Database.Interface;
+package view.Interface;
 
 import java.sql.SQLException;
 

@@ -1,4 +1,4 @@
-package controller.Interface;
+package modell.Interface;
 
 public interface Ikunde {
 
