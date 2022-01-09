@@ -13,6 +13,7 @@ public class Kunder extends DB {
     private String Telefon;
     private String Email;
 
+
     public Kunder(String fornavn, String etternavn, String telefon, String email) {
         this.fornavn = fornavn;
         this.etternavn = etternavn;
@@ -22,13 +23,13 @@ public class Kunder extends DB {
 
 
     /**
-     * 
-     * @return
-     * @throws SQLException
+     * metode for å lage en kunde
+     * @return int verdi for å legger inn kunde inn i databsen
+     * @throws SQLException dersom man skrive noe feil
      */
 
     public int kunde() throws SQLException {
-        String insert = "insert into kunde(Fødelsnummer, Fornavn, Etternavn, Telefon, Email) values(?,?,?,?,?);";
+        String insert = "insert into kunde(Fødselsnummer, Fornavn, Etternavn, Telefon, Email) values(?,?,?,?,?);";
         scanner = new Scanner(System.in);
         System.out.println("legg inn fødelselsnummer");
         String persnr = scanner.nextLine();
@@ -62,33 +63,143 @@ public class Kunder extends DB {
         return -1;
     }
 
-    public void søke_kundebilde(int søke_Funksjon){
-        String enkel_Søk = "select * from kunde where ? = ? ";
-        String flere_kriterier = "select * from kunde where ? = ? and ? like '%?%' ";
-        System.out.println("velg 1 for enkeltsøk eller 2 for flervalgsøk");
+    /**
+     * søke opp kunde
+     * @param valg_Til_Søke int verdi for å søke opp kunden
+     * @throws SQLException får en sql feilmelding dersom man skriver feil verdi
+     */
+
+    public void søke_kundebilde( int valg_Til_Søke) throws SQLException {
+        String enkel_Søk = "select * from kunde where Fødselsnummer = ? ";
+        String flere_kriterier = "select * from kunde where Fødselsnummer = ? and Telefon like ? ";
+        con = DriverManager.getConnection(Connection_String, user, password);
+
         scanner = new Scanner(System.in);
         if(scanner != null){
-            int valg_Til_Søke= scanner.nextInt();
-            søke_Funksjon = valg_Til_Søke;
+            if(valg_Til_Søke == 1 ){
+                ps = con.prepareStatement(enkel_Søk);
+                System.out.println("skriv inn Fødselsnummer");
+                String søkevalg = scanner.nextLine();
+                ps.setString(1, søkevalg);
+
+                rs = ps.executeQuery();
 
 
 
+                while(rs.next()){
+                    System.out.println(rs.getString(1));
+                    System.out.println(rs.getString(2));
+                    System.out.println(rs.getString(3));
+                    System.out.println(rs.getString(4));
+                    System.out.println(rs.getString(5));
+                }
+            }
+            else if(valg_Til_Søke == 2){
+                ps = con.prepareStatement(flere_kriterier);
+                System.out.println("skriv inn Fødselsnummer");
+                String søkegrunnlag = scanner.nextLine();
+                System.out.println("skriv inn søkefelt");
+                String søkevalg = scanner.nextLine();
+                ps.setString(1, søkegrunnlag);
+                ps.setString(2, "%"+ søkevalg + "%");
+                 rs = ps.executeQuery();
+
+                while(rs.next()){
+                    System.out.println(rs.getString(1));
+                    System.out.println(rs.getString(2));
+                    System.out.println(rs.getString(3));
+                    System.out.println(rs.getString(4));
+                    System.out.println(rs.getString(5));
+                }
+            }
+            else {
+                System.out.println("inkorrekt valg start på nytt");
+            }
+
+        }
+    }
+
+    /**
+     * metode for å slette kunde bilde
+     * @param slettegrunnlag tekstlig verdi for å ordet man ønsker å slette
+     * @throws SQLException kaster ut en sql feilspørring
+     */
+
+    public void slette_Kundebilde(String slettegrunnlag) throws SQLException {
+        String enkel_Søk = "select * from kunde where Fødselsnummer = ? ";
+
+        String delete = "delete from kunde where Fødselsnummer = ?";
+        con = DriverManager.getConnection(Connection_String, user, password);
+        ps = con.prepareStatement(enkel_Søk);
+
+        ps.setString(1, slettegrunnlag);
+        rs = ps.executeQuery();
+        while(rs.next()){
+            String sjekk =  rs.getString(1);
+            if(sjekk.compareToIgnoreCase(slettegrunnlag) == 0){
+                ps = con.prepareStatement(delete);
+                ps.setString(1, slettegrunnlag);
+                ps.executeUpdate();
+
+            }
 
         }
 
+    }
+
+    private void innlogging(String tilbakeMelding, String brukernavnet, String passord) {
+
+        switch (tilbakeMelding) {
+            case "brukernavner feil":
+                System.out.println("brukernavnet " + brukernavnet + " eksisterer ikke eller er skrevet feil");
+                break;
+            case "passord feil":
+                System.out.println("Passordet " + passord + " er feil kan du vennligst angi passordet på nytt");
+                break;
+            case "vellyket innlogging":
+                System.out.println("Vellykket innlogging");
+                break;
+            default:
+                System.out.println("Det har oppstått en feil under innlogging");
+                break;
+        }
+    }
+
+    /**
+     * @param tilbakeMelding en tekstlig tilbakemelding som kunden får ifra handlingen han ønsker å utføre i klassen
+     * @param tilbakeMelding en tekslig tilbakemelding fra andre metoder for å vise hvilken informasjon som skal vises til kunden
+     * @param konto_Nummer en tekstlig kontonummer som brukse til å vise hva man har i
+     * @param penger en tallverdi  sum, som brukes til å beregne balansen etter utført transaksjon
+     */
 
 
-
-
-
-
+    public void transaksjoner(String tilbakeMelding, String konto_Nummer, long balansen, int penger){
+        transaksjon(tilbakeMelding, konto_Nummer, penger , balansen);
 
     }
 
-    public void slette_Kundebilde(){
 
+    private void transaksjon(String tilbakeMelding, String konto_Nummer, int penger,long balansen) {
 
+        switch (tilbakeMelding) {
+            case "Mangler midler":
+                System.out.println("penger " + penger + " er for mye for " + konto_Nummer + " du har " + balansen + " inn i kontoret ditt");
+                break;
+            case "Konto Finnes ikke":
+                System.out.println("Kontonummer: " + konto_Nummer + " finnes ikke sjekk gjerne at du har riktig kontonummer");
+                break;
+            case "Overførte penger":
+                System.out.println("du har overførte " + penger  + " til kontonummer " + konto_Nummer);
+                break;
+            case "laget nytt konto":
+                System.out.println("kontonummeret " + konto_Nummer + " har blitt opprettet ");
+            case "feil kontonummer":
+                System.out.println("kontonummeret " + konto_Nummer + " kan ikke opprettes");
+            case "kan ikke overføre mellom kontoer":
+                System.out.println("kan ikke overføre mellom kontoene");
+        }
     }
+
 
 
 

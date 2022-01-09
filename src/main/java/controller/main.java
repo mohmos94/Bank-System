@@ -1,7 +1,5 @@
 package controller;
 
-import modell.classes.Kunde;
-
 import java.sql.SQLException;
 
 public class main {
