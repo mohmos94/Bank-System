@@ -1,8 +1,6 @@
 package modell.classes;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class DB {
@@ -20,4 +18,23 @@ public class DB {
     public static final String SQL_CREATE_BankKonto = "CREATE TABLE if not exists Bankkonto(Kontonummer int NOT NULL, Kontonavn varchar(150), Balansen long, SystemID int , PRIMARY KEY (Kontonummer),FOREIGN KEY (SystemID) REFERENCES Banksystem(SystemID))";
     public static final String SQL_CREATE_Transaksjoner = "CREATE TABLE if not exists Transaksjoner(Referansenummer int NOT NULL AUTO_INCREMENT, Kontonummer int, Sum int, PRIMARY KEY (Referansenummer), FOREIGN KEY (Kontonummer) REFERENCES Bankkonto(Kontonummer))";
 
+    public static void main(String[] args) {
+        try {
+
+            con = DriverManager.getConnection(Connection_String, user, password);
+            stat = con.createStatement();
+            stat.addBatch(SQL_CREATE_Kunde);
+            stat.addBatch(SQL_CREATE_BankSystem);
+            stat.addBatch(SQL_CREATE_BankKonto);
+            stat.addBatch(SQL_CREATE_Transaksjoner);
+            stat.executeBatch();
+
+        }
+
+        catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+    }
 }
