@@ -1,6 +1,6 @@
 package modell.classes;
 
-import view.Classes.DbKunde;
+import modell.Database.Classes.DbKunde;
 import modell.Interface.Ikunde;
 
 import java.sql.SQLException;
@@ -13,7 +13,6 @@ import java.sql.SQLException;
 public class Kunde implements Ikunde {
     private String for_Navn;
     private String etter_Navn;
-    private String fullname;
     private String telefon;
     private String mail;
 
@@ -36,15 +35,13 @@ public class Kunde implements Ikunde {
         this.etter_Navn = etter_Navn;
         this.telefon = telefon;
         this.mail = mail;
-        this.fullname = for_Navn + etter_Navn;
-        createCustomer();
     }
 
 
     public void createCustomer () throws SQLException {
 
 
-        kunde.insert(1, this.etter_Navn, this.for_Navn, this.telefon,this.mail);
+   //     kunde.insert(this.etter_Navn, this.for_Navn, this.telefon,this.mail);
     }
 
 
