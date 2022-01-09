@@ -1,12 +1,10 @@
 package modell.classes;
 
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Kunder extends DB {
+public class Kunder extends DBOppsett {
 
     private String fornavn;
     private String etternavn;
