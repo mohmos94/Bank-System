@@ -19,7 +19,10 @@ public class test {
         //system.slette_Kundebilde("12345678912");
 
         Bank_kontoer konto =  new Bank_kontoer("123456789", "spareKonto", 0, 6);
-        konto.Konto();
+        //konto.Konto();
+
+        Transaksjoner transaksjoner = new Transaksjoner(1, "123456789", 200);
+        transaksjoner.banksystem();
 
 
 

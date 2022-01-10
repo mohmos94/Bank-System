@@ -55,7 +55,7 @@ public class BankSystem extends DBOppsett {
                     System.out.println(rs.getString(3));
                     System.out.println(rs.getString(4));
                 }
-                
+
             }
             else {
                 System.out.println("inkorrekt valg start på nytt");

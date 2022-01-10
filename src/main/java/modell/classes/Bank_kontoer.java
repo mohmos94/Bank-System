@@ -19,6 +19,7 @@ public class Bank_kontoer extends DBOppsett {
         SystemID = systemID;
     }
 
+
     public int Konto() throws SQLException {
         String insert = "insert into bankkonto(Kontonummer, Kontonavn, Balansen, SystemID) values(?,?,?,?)";
         String enkel_Søk = "select * from kunde where Fødselsnummer = ? ";
@@ -34,6 +35,7 @@ public class Bank_kontoer extends DBOppsett {
     }
 
     public int slett_Konto() throws SQLException {
+
         String delete = "delete from banksystem where kontonummer = ?";
 
         con = DriverManager.getConnection(Connection_String, user, password);
@@ -42,12 +44,6 @@ public class Bank_kontoer extends DBOppsett {
         return ps.executeUpdate();
 
     }
-
-
-
-
-
-
 
 
     public String getKontonummer() {
