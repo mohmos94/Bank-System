@@ -1,4 +1,4 @@
-package modell.classes;
+package modell;
 
 
 import java.sql.SQLException;
@@ -18,11 +18,15 @@ public class test {
         //system.søke_Brukere();
         //system.slette_Kundebilde("12345678912");
 
-        Bank_kontoer konto =  new Bank_kontoer("123456789", "spareKonto", 0, 6);
+        Bank_kontoer konto =  new Bank_kontoer("09099428705", "spareKonto", 0, 6);
         //konto.Konto();
 
-        Transaksjoner transaksjoner = new Transaksjoner(1, "123456789", 200);
-        transaksjoner.banksystem();
+        Transaksjoner transaksjoner = new Transaksjoner(1, "09099428705", 2000);
+
+        //transaksjoner.insert("09099428705");
+        transaksjoner.søke_Transaksjoner();
+
+
 
 
 

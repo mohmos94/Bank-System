@@ -1,4 +1,4 @@
-package modell.classes;
+package modell;
 
 import java.sql.*;
 import java.util.Scanner;

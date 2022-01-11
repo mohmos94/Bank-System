@@ -1,4 +1,6 @@
-package modell.classes;
+package modell;
+
+import modell.Interface.IBanksystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class BankSystem extends DBOppsett {
+public class BankSystem extends DBOppsett implements IBanksystem {
     private int SystemID;
     private String Brukernavn;
     private String Passord;
@@ -16,9 +18,10 @@ public class BankSystem extends DBOppsett {
         Brukernavn = brukernavn;
         Passord = passord;
         Fødselsnummer = fødselsnummer;
+
     }
 
-
+    @Override
     public int banksystem() throws SQLException {
         String insert = "insert into banksystem(brukernavn, Passord, Fødselsnummer) values(?,?,?)";
         String enkel_Søk = "select * from kunde where Fødselsnummer = ? ";
@@ -32,11 +35,7 @@ public class BankSystem extends DBOppsett {
                 return ps.executeUpdate();
     }
 
-    /**
-     * søke opp banksystem
-     * @throws SQLException får en sql feilmelding dersom man skriver feil verdi
-     */
-
+    @Override
     public void søke_Brukere() throws SQLException {
         String enkel_Søk = "select * from banksystem where Fødselsnummer = ? ";
         con = DriverManager.getConnection(Connection_String, user, password);
@@ -63,6 +62,7 @@ public class BankSystem extends DBOppsett {
 
         }
 
+    @Override
     public void update() throws SQLException {
         System.out.println("running SQL code...");
         String update = "update bruker set Brukernavn = ?, Passord = ? where Fødselsnummer = ?";
@@ -79,12 +79,8 @@ public class BankSystem extends DBOppsett {
 
     }
 
-    /**
-     * metode for å slette banksystem bilde
-     * @param Fødelsnummer tekstlig verdi for å ordet man ønsker å slette
-     * @throws SQLException kaster ut en sql feilspørring
-     */
 
+    @Override
     public void slette_Kundebilde(String Fødelsnummer) throws SQLException {
         String enkel_Søk = "select * from banksystem where Fødselsnummer = ? ";
 
@@ -103,6 +99,8 @@ public class BankSystem extends DBOppsett {
             }
         }
     }
+
+
 
     public int getSystemID() {
         return SystemID;

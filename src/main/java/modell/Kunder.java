@@ -1,4 +1,4 @@
-package modell.classes;
+package modell;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -163,12 +163,6 @@ public class Kunder extends DBOppsett {
         }
     }
 
-    /**
-     * @param tilbakeMelding en tekstlig tilbakemelding som kunden får ifra handlingen han ønsker å utføre i klassen
-     * @param tilbakeMelding en tekslig tilbakemelding fra andre metoder for å vise hvilken informasjon som skal vises til kunden
-     * @param konto_Nummer en tekstlig kontonummer som brukse til å vise hva man har i
-     * @param penger en tallverdi  sum, som brukes til å beregne balansen etter utført transaksjon
-     */
 
 
     public void transaksjoner(String tilbakeMelding, String konto_Nummer, long balansen, int penger){
