@@ -1,9 +1,9 @@
-package modell;
+package modell.Classes;
 
 import java.sql.*;
 import java.util.Scanner;
 
-abstract class DBOppsett {
+public abstract class DBOppsett {
     public static final String Connection_String ="jdbc:mysql://localhost:3306/banksystem";
     public static final String user = "root";
     public static final String password  = "Nettavisen123+";

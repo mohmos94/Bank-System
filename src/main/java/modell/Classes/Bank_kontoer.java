@@ -1,5 +1,6 @@
-package modell;
+package modell.Classes;
 
+import modell.Classes.DBOppsett;
 import modell.Interface.IBank_Konto;
 
 import java.sql.DriverManager;

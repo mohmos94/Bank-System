@@ -1,4 +1,7 @@
-package modell;
+package modell.Classes;
+
+import modell.Classes.DBOppsett;
+import modell.Interface.ITransaksjoner;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Transaksjoner extends DBOppsett {
+public class Transaksjoner extends DBOppsett implements ITransaksjoner {
 
     private int referansenummer;
     private String kontonummer;
@@ -20,6 +23,7 @@ public class Transaksjoner extends DBOppsett {
     }
 
 
+    @Override
     public int insert(String kontonummer ) throws SQLException {
 
 
@@ -43,6 +47,7 @@ public class Transaksjoner extends DBOppsett {
      * @throws SQLException får en sql feilmelding dersom man skriver feil verdi
      */
 
+    @Override
     public void søke_Transaksjoner () throws SQLException {
 
         String enkel_Søk = "select * from transaksjoner where Kontonummer = ? ";
@@ -77,6 +82,7 @@ public class Transaksjoner extends DBOppsett {
 
 
 
+    @Override
     public void update() throws SQLException {
         System.out.println("running SQL code...");
         String update = "update transaksjoner set Kontonummer = ?, Sum = ? where Referansenummer = ?";
@@ -96,6 +102,7 @@ public class Transaksjoner extends DBOppsett {
      * @throws SQLException kaster ut en sql feilspørring
      */
 
+    @Override
     public void slette_transaksjoner() throws SQLException {
         String enkel_Søk = "select * from transaksjoner where Kontonummer = ? ";
 

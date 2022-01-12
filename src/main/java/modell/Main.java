@@ -1,5 +1,7 @@
 package modell;
 
+import modell.Classes.DBOppsett;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -12,5 +14,7 @@ public class Main extends DBOppsett {
         stat.addBatch(SQL_CREATE_BankKonto);
         stat.addBatch(SQL_CREATE_Transaksjoner);
         stat.executeBatch();
+
+
     }
 }

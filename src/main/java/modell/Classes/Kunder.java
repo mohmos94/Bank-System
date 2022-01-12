@@ -1,10 +1,12 @@
-package modell;
+package modell.Classes;
+
+import modell.Interface.IKunde;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Kunder extends DBOppsett {
+public class Kunder extends DBOppsett implements IKunde {
 
     private String fornavn;
     private String etternavn;
@@ -26,6 +28,7 @@ public class Kunder extends DBOppsett {
      * @throws SQLException dersom man skrive noe feil
      */
 
+    @Override
     public int kunde() throws SQLException {
         String insert = "insert into kunde(Fødselsnummer, Fornavn, Etternavn, Telefon, Email) values(?,?,?,?,?);";
         scanner = new Scanner(System.in);
@@ -67,6 +70,7 @@ public class Kunder extends DBOppsett {
      * @throws SQLException får en sql feilmelding dersom man skriver feil verdi
      */
 
+    @Override
     public void søke_kundebilde( int valg_Til_Søke) throws SQLException {
         String enkel_Søk = "select * from kunde where Fødselsnummer = ? ";
         String flere_kriterier = "select * from kunde where Fødselsnummer = ? and Telefon like ? ";
@@ -123,6 +127,7 @@ public class Kunder extends DBOppsett {
      * @throws SQLException kaster ut en sql feilspørring
      */
 
+    @Override
     public void slette_Kundebilde(String slettegrunnlag) throws SQLException {
         String enkel_Søk = "select * from kunde where Fødselsnummer = ? ";
 
@@ -145,7 +150,8 @@ public class Kunder extends DBOppsett {
 
     }
 
-    private void innlogging(String tilbakeMelding, String brukernavnet, String passord) {
+    @Override
+    public void innlogging(String tilbakeMelding, String brukernavnet, String passord) {
 
         switch (tilbakeMelding) {
             case "brukernavner feil":
@@ -165,6 +171,8 @@ public class Kunder extends DBOppsett {
 
 
 
+
+    @Override
     public void transaksjoner(String tilbakeMelding, String konto_Nummer, long balansen, int penger){
         transaksjon(tilbakeMelding, konto_Nummer, penger , balansen);
 

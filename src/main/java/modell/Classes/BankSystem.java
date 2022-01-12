@@ -1,4 +1,4 @@
-package modell;
+package modell.Classes;
 
 import modell.Interface.IBanksystem;
 
@@ -99,7 +99,6 @@ public class BankSystem extends DBOppsett implements IBanksystem {
             }
         }
     }
-
 
 
     public int getSystemID() {
