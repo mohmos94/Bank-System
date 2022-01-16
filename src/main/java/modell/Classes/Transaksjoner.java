@@ -29,7 +29,6 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
     }
 
     /**
-     *
      * @param kontonummer
      * @return
      * @throws SQLException

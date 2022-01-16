@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class PDF extends DBOppsett implements IPDF {
 
     String dest = "C:/PdfBox_Examples/sample.pdf";
-
+    String information = "Konto utskrift ";
     /**
      * skriver ut PDf fil
      * @throws SQLException gir et sql feil dersom det er noe feil med databaser
