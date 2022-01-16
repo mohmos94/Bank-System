@@ -28,6 +28,7 @@ public class Kunder extends DBOppsett implements IKunde {
      * @throws SQLException dersom man skrive noe feil
      */
 
+
     @Override
     public int kunde() throws SQLException {
         String insert = "insert into kunde(Fødselsnummer, Fornavn, Etternavn, Telefon, Email) values(?,?,?,?,?);";
@@ -150,6 +151,14 @@ public class Kunder extends DBOppsett implements IKunde {
 
     }
 
+
+    /**
+     *
+     * @param tilbakeMelding
+     * @param brukernavnet
+     * @param passord
+     */
+
     @Override
     public void innlogging(String tilbakeMelding, String brukernavnet, String passord) {
 
@@ -170,6 +179,13 @@ public class Kunder extends DBOppsett implements IKunde {
     }
 
 
+    /**
+     *
+     * @param tilbakeMelding
+     * @param konto_Nummer
+     * @param balansen
+     * @param penger
+     */
 
 
     @Override

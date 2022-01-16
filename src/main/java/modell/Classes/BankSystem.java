@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class BankSystem extends DBOppsett implements IBanksystem {
+
     private int SystemID;
     private String Brukernavn;
     private String Passord;
@@ -18,8 +19,14 @@ public class BankSystem extends DBOppsett implements IBanksystem {
         Brukernavn = brukernavn;
         Passord = passord;
         Fødselsnummer = fødselsnummer;
-
     }
+
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
 
     @Override
     public int banksystem() throws SQLException {
@@ -34,6 +41,11 @@ public class BankSystem extends DBOppsett implements IBanksystem {
                 System.out.println("SQL code is finished successfully");
                 return ps.executeUpdate();
     }
+
+    /**
+     *
+     * @throws SQLException
+     */
 
     @Override
     public void søke_Brukere() throws SQLException {
@@ -62,6 +74,12 @@ public class BankSystem extends DBOppsett implements IBanksystem {
 
         }
 
+
+    /**
+     *
+     * @throws SQLException
+     */
+
     @Override
     public void update() throws SQLException {
         System.out.println("running SQL code...");
@@ -79,6 +97,11 @@ public class BankSystem extends DBOppsett implements IBanksystem {
 
     }
 
+    /**
+     *
+     * @param Fødelsnummer
+     * @throws SQLException
+     */
 
     @Override
     public void slette_Kundebilde(String Fødelsnummer) throws SQLException {

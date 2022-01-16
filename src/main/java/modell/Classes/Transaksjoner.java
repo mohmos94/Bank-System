@@ -2,7 +2,12 @@ package modell.Classes;
 
 import modell.Classes.DBOppsett;
 import modell.Interface.ITransaksjoner;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,6 +26,13 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
         this.kontonummer = kontonummer;
         Sum = sum;
     }
+
+    /**
+     *
+     * @param kontonummer
+     * @return
+     * @throws SQLException
+     */
 
 
     @Override
@@ -48,7 +60,7 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
      */
 
     @Override
-    public void søke_Transaksjoner () throws SQLException {
+    public void søke_Transaksjoner () throws SQLException, IOException {
 
         String enkel_Søk = "select * from transaksjoner where Kontonummer = ? ";
 
@@ -59,13 +71,27 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
             System.out.println("skriv inn kontonummer");
             String søkevalg = scanner.nextLine();
             ps.setString(1, søkevalg);
-
             rs = ps.executeQuery();
+            file = new File("C:/PdfBox_Examples/kontoutskrift.pdf");
+            pdf = PDDocument.load(file);
+            page = pdf.getPage(0);
+            contentStream = new PDPageContentStream(pdf, page);
+
+
 
             while(rs.next()){
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
-                System.out.println(rs.getString(3));
+                String referanse = rs.getString(1);
+                String kontonmummer = rs.getString(2);
+                String sum = rs.getString(3);
+
+                contentStream.beginText();
+                contentStream.newLineAtOffset(1,1);
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+                contentStream.showText("kontonummer " + kontonmummer + " kiddnummer " + referanse + " kostnader " + sum + " kr");
+                contentStream.endText();
+                contentStream.close();
+                pdf.save("C:/PdfBox_Examples/kontoutskrift.pdf");
+                pdf.close();
             }
 
         }

@@ -59,24 +59,7 @@ public class test {
 
          */
 
-        File file = new File("C:/PdfBox_Examples/mosti.pdf");
-       PDDocument dokument = PDDocument.load(file);
-
-        PDPage page = dokument.getPage(0);
-        PDPageContentStream contentStream = new PDPageContentStream(dokument, page);
-        contentStream.beginText();
-        String text = "THIS IS A TEST";
-        contentStream.setFont(PDType1Font.TIMES_ROMAN,12);
-        contentStream.newLineAtOffset(25,700);
-        contentStream.showText(text);
-        contentStream.endText();
-        contentStream.close();
-        //Saving the document
-        dokument.save(new File("C:/PdfBox_Examples/new.pdf"));
-
-        //Closing the document
-        dokument.close();
-
+        transaksjoner.søke_Transaksjoner();
 
 
 

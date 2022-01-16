@@ -19,6 +19,12 @@ public class Bank_kontoer extends DBOppsett implements IBank_Konto {
         SystemID = systemID;
     }
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
+
     @Override
     public int Konto() throws SQLException {
         String insert = "insert into bankkonto(Kontonummer, Kontonavn, Balansen, SystemID) values(?,?,?,?)";
@@ -42,6 +48,12 @@ public class Bank_kontoer extends DBOppsett implements IBank_Konto {
 
 
     }
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
 
     @Override
     public int oppdatere() throws SQLException {
@@ -68,6 +80,13 @@ public class Bank_kontoer extends DBOppsett implements IBank_Konto {
         }
         return -1;
     }
+
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
 
 
 
