@@ -1,10 +1,10 @@
 package modell.Classes;
 
-import modell.Classes.DBOppsett;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Table;
 import modell.Interface.ITransaksjoner;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,12 +18,13 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
 
     private int referansenummer;
     private String kontonummer;
+    private String beskrivelse;
     private int Sum;
 
-
-    public Transaksjoner(int referansenummer, String kontonummer, int sum) {
+    public Transaksjoner(int referansenummer, String kontonummer, String beskrivelse, int sum) {
         this.referansenummer = referansenummer;
         this.kontonummer = kontonummer;
+        this.beskrivelse = beskrivelse;
         Sum = sum;
     }
 
@@ -40,13 +41,14 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
 
 
         if(getKontonummer().compareToIgnoreCase(kontonummer) == 0){
-            String insert = "insert into transaksjoner(Referansenummer, Kontonummer, Sum) values(?,?,?)";
+            String insert = "insert into transaksjoner(Referansenummer, Kontonummer, Sum, beskrivelse) values(?,?,?,?)";
             con = DriverManager.getConnection(Connection_String, user, password);
             ps = con.prepareStatement(insert);
             System.out.println("running SQL code...");
             ps.setInt(1, getReferansenummer());
             ps.setString(2, getKontonummer());
             ps.setInt(3, getSum());
+            ps.setString(4,getBeskrivelse());
             System.out.println("SQL code is finished successfully");
             return ps.executeUpdate();
         }
@@ -72,10 +74,19 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
             String søkevalg = scanner.nextLine();
             ps.setString(1, søkevalg);
             rs = ps.executeQuery();
-            file = new File("C:/PdfBox_Examples/kontoutskrift.pdf");
-            pdf = PDDocument.load(file);
-            page = pdf.getPage(0);
-            contentStream = new PDPageContentStream(pdf, page);
+
+            String destination = "C:/PdfBox_Examples/kontoutskrift.pdf";
+            writer = new PdfWriter(destination);
+            pdfDoc = new PdfDocument(writer);
+            float [] pointColumnWidths = {150F, 150F, 150F};
+            table = new Table(pointColumnWidths);
+
+            table.addCell(new Cell().add("Kontonummer"));
+            table.addCell(new Cell().add("Beskrivelse"));
+            table.addCell(new Cell().add("Kiddnummer"));
+
+
+
 
 
 
@@ -84,14 +95,6 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
                 String kontonmummer = rs.getString(2);
                 String sum = rs.getString(3);
 
-                contentStream.beginText();
-                contentStream.newLineAtOffset(1,1);
-                contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-                contentStream.showText("kontonummer " + kontonmummer + " kiddnummer " + referanse + " kostnader " + sum + " kr");
-                contentStream.endText();
-                contentStream.close();
-                pdf.save("C:/PdfBox_Examples/kontoutskrift.pdf");
-                pdf.close();
             }
 
         }
@@ -172,5 +175,13 @@ public class Transaksjoner extends DBOppsett implements ITransaksjoner {
 
     public void setSum(int sum) {
         Sum = sum;
+    }
+
+    public String getBeskrivelse() {
+        return beskrivelse;
+    }
+
+    public void setBeskrivelse(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
     }
 }

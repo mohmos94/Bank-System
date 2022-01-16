@@ -1,17 +1,15 @@
 package modell;
 
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 
-import modell.Classes.BankSystem;
-import modell.Classes.Bank_kontoer;
-import modell.Classes.Kunder;
-import modell.Classes.Transaksjoner;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDDocumentInformation;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import modell.Classes.*;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -34,9 +32,9 @@ public class test {
         Bank_kontoer konto =  new Bank_kontoer("09099428705", "spareKonto", 0, 6);
         //konto.Konto();
 
-        Transaksjoner transaksjoner = new Transaksjoner(1, "09099428705", 2000);
+       // Transaksjoner transaksjoner = new Transaksjoner(3, "123456789", "spar",1200);
 
-        //transaksjoner.insert("09099428705");
+        //transaksjoner.insert("123456789");
         //transaksjoner.søke_Transaksjoner();
 
         //Creating PDF document object
@@ -59,7 +57,44 @@ public class test {
 
          */
 
-        transaksjoner.søke_Transaksjoner();
+        /*
+        String testing  = "dette er en test for å sjekk om dette fungerer";
+        String dest = "C:/PdfBox_Examples/sample.pdf";
+        Paragraph par = new Paragraph(testing);
+
+
+        PdfWriter writer = new PdfWriter(dest);
+
+        // Creating a PdfDocument
+        PdfDocument pdfDoc = new PdfDocument(writer);
+
+        // Adding a new page
+        pdfDoc.addNewPage();
+
+        // Creating a Document
+        Document document = new Document(pdfDoc);
+        float [] pointColumnWidths = {150F, 150F, 150F};
+
+        Table table = new Table(pointColumnWidths);
+        table.addCell(new Cell().add("Name"));
+        table.addCell(new Cell().add("Name"));
+        table.addCell(new Cell().add("Name"));
+        document.add(table);
+
+
+
+        document.add(table);
+
+        // Closing the document
+        document.close();
+        System.out.println("PDF Created");
+
+
+         */
+
+        PDF pdf = new PDF();
+        pdf.skriv_Ut_Transaksjoner();
+
 
 
 
